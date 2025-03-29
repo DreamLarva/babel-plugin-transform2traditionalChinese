@@ -1,6 +1,6 @@
-const chinese = require("./s2t");
+const chinese = require("chinese-s2t");
 
-function babelTranslatePlugin({ types: t }) {
+module.exports = function babelTranslatePlugin({ types: t }) {
   return {
     visitor: {
       Identifier(path) {
@@ -53,12 +53,13 @@ function babelTranslatePlugin({ types: t }) {
 
             // 检查注释
             const isNoTranslate =
+              // 查找所有的父节点
               path.find((p) => {
                 // console.log(p)
-                const c = p.node.leadingComments;
+                const hasLeadingComments = p.node.leadingComments;
 
                 return (
-                  c &&
+                  hasLeadingComments &&
                   p.node.leadingComments.some((v) =>
                     /@no-translate/.test(v.value),
                   )
@@ -80,8 +81,16 @@ function babelTranslatePlugin({ types: t }) {
           }
         }
       },
+      TemplateElement(path) {
+        const { raw: originalValue } = path.node.value;
+
+        const traditional = chinese.s2t(originalValue);
+        //
+        if (originalValue !== traditional) {
+          path.node.value.raw = chinese.s2t(path.node.value.raw);
+          path.node.value.cooked = chinese.s2t(path.node.value.cooked);
+        }
+      },
     },
   };
-}
-
-module.exports = babelTranslatePlugin;
+};

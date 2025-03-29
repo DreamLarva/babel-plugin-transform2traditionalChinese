@@ -1,0 +1,33 @@
+{
+  "name": "babel-plugin-transform2traditionalchinese",
+  "version": "1.0.0",
+  "description": "transform simple Chinese to traditional Chinese",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DreamLarva/babel-plugin-transform2traditionalChinese.git"
+  },
+  "keywords": [
+    "babel-plugin",
+    "simpleChinese",
+    "traditionalChinese"
+  ],
+  "author": "YangJiaqi",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DreamLarva/babel-plugin-transform2traditionalChinese/issues"
+  },
+  "homepage": "https://github.com/DreamLarva/babel-plugin-transform2traditionalChinese#readme",
+  "dependencies": {
+    "chinese-s2t": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-react": "^7.26.3",
+    "prettier": "^3.5.3"
+  }
+}
